@@ -26,8 +26,9 @@ export class UsersService {
     },
   ];
 
-  findOne(username: string): User {
-    return this.users.find((user) => user.username === username);
+  async findOne(username: string): Promise<Users> {
+    const user = await this.usersRepository.findOneBy({ username: username });
+    return user!;
   }
 
   async createAdminUser(): Promise<Users> {
